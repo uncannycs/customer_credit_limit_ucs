@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_credit_limit_warning_wizard,credit.limit.warning.wizard,model_credit_limit_warning_wizard,base.group_user,1,1,1,1
+access_account_move_credit_limit_user,account.move.credit.limit.user,account.model_account_move,base.group_user,1,0,0,0
