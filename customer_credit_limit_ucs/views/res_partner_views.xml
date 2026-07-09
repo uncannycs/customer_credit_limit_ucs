@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_partner_form_credit_limit" model="ir.ui.view">
+        <field name="name">res.partner.form.credit.limit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='sale']" position="inside">
+                <field name="active_credit_limit"
+                       groups="sales_team.group_sale_manager"/>
+                <field name="credit_limit_amount"
+                       groups="sales_team.group_sale_manager"
+                       invisible="not active_credit_limit"
+                       required="active_credit_limit"/>
+                <field name="active_credit_limit"
+                       readonly="1"
+                       groups="!sales_team.group_sale_manager"/>
+                <field name="credit_limit_amount"
+                       readonly="1"
+                       groups="!sales_team.group_sale_manager"
+                       invisible="not active_credit_limit"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
