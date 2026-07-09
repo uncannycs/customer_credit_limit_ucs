@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="email_template_credit_limit_request" model="mail.template">
+            <field name="name">Credit Limit: Approval Request</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Credit limit exceeded: {{ object.name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or '') }}</field>
+            <field name="description">Sent to managers when an order exceeds the customer's credit limit</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 15px; background-color: #f1f8ff; border: 1px solid #c8e1ff; border-radius: 6px; font-family: sans-serif; font-size: 13px; color: #24292e;">
+                    <p style="margin: 0px 0px 10px 0px; font-weight: bold; font-size: 13px;">
+                        Subject: Credit limit exceeded: {{ object.name }}
+                    </p>
+                    <p style="margin: 0px 0px 10px 0px;">
+                        Hi {{ object.company_id.name }},
+                    </p>
+                    <p style="margin: 0px 0px 15px 0px;">
+                        The Sales Order <strong>{{ object.name }}</strong> needs your approval because <strong>Total amount is exceeding from credit limit.</strong>
+                    </p>
+                    <ul style="margin: 0px 0px 15px 0px; padding-left: 20px; list-style-type: disc;">
+                        <li style="margin-bottom: 5px;">Customer: {{ object.partner_id.name }}</li>
+                        <li style="margin-bottom: 5px;">Credit Limit: {{ ctx.get('credit_limit') }}</li>
+                        <li style="margin-bottom: 5px;">Unpaid Amount: {{ ctx.get('unpaid_amount') }}</li>
+                        <li style="margin-bottom: 5px;">Overdue Amount: {{ ctx.get('overdue_amount') }}</li>
+                        <li style="margin-bottom: 5px;">Order Amount: {{ ctx.get('order_amount') }}</li>
+                        <li style="margin-bottom: 5px; color: #d93025; font-weight: bold;">Exceeded Credit: {{ ctx.get('exceeded_credit') }}</li>
+                    </ul>
+                    <div style="margin: 15px 0px 15px 0px;">
+                        <a href="/web#id={{ object.id }}&amp;model=sale.order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:12px; font-weight: bold; display: inline-block;">
+                            View sales order
+                        </a>
+                    </div>
+                    <p style="margin: 15px 0px 0px 0px;">
+                        Thanks &amp; Regards,<br/>
+                        {{ object.user_id.name }}
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_template_credit_limit_approved" model="mail.template">
+            <field name="name">Credit Limit: Order Approved</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Order Approved: {{ object.name }}</field>
+            <field name="email_from">{{ (object.company_id.email_formatted or '') }}</field>
+            <field name="partner_to">{{ object.user_id.partner_id.id }}</field>
+            <field name="description">Sent to salespeople when a credit-blocked order is approved</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 15px; background-color: #e6f4ea; border: 1px solid #c2e7cd; border-radius: 6px; font-family: sans-serif; font-size: 13px; color: #24292e;">
+                    <p style="margin: 0px 0px 10px 0px; font-weight: bold; font-size: 13px;">
+                        Subject: Order Approved: {{ object.name }}
+                    </p>
+                    <p style="margin: 0px 0px 10px 0px;">
+                        Hi {{ object.user_id.name }},
+                    </p>
+                    <p style="margin: 0px 0px 15px 0px;">
+                        The Sales Order <strong>{{ object.name }}</strong> has been approved. You can proceed for further actions.
+                    </p>
+                    <div style="margin: 15px 0px 15px 0px;">
+                        <a href="/web#id={{ object.id }}&amp;model=sale.order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:12px; font-weight: bold; display: inline-block;">
+                            View sales order
+                        </a>
+                    </div>
+                    <p style="margin: 15px 0px 0px 0px;">
+                        Thanks &amp; Regards,<br/>
+                        {{ object.company_id.name }}
+                    </p>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</odoo>
