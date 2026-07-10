@@ -44,4 +44,7 @@ This module implements a rigorous customer credit limit control:
     'installable': True,
     'application': True,
     "license": "Other proprietary",
+    "images": ['static/description/banner.gif'],
+    "price": 10,
+    "currency": "USD"
 }
