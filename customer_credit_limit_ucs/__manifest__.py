@@ -11,7 +11,7 @@
 #
 ##############################################################################
 {
-    'name': 'Customer Credit Limit Ucs',
+    'name': 'Customer Credit Limit | Customer Credit Control | Credit Limit Management | Customer Credit Management | Partner Credit Limit | Credit Limit Restriction | Customer Credit Approval',
     'version': '19.0.1.0.0',
     'category': 'Sales',
     'summary': 'Set customer credit limits with popup warnings and automated manager approval emails',
